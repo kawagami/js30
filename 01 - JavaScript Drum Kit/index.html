@@ -77,6 +77,7 @@
           endKey.classList.remove('playing')
         }, 100);
         // 播放endAudio src中的聲音檔
+        endAudio.currentTime = 0;
         endAudio.play()
       }
     }

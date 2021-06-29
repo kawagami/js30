@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+</head>
+
+<body>
+
+
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
+    </div>
+  </div>
+
+
+  <style>
+    html {
+      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border: 20px solid white;
+      border-radius: 50%;
+      margin: 50px auto;
+      position: relative;
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px);
+      /* account for the height of the clock hands */
+    }
+
+    .hand {
+      width: 50%;
+      height: 6px;
+      background: black;
+      position: absolute;
+      top: 50%;
+      transform: rotate(calc((90deg + 0deg)));
+      transform-origin: right;
+    }
+  </style>
+
+  <script>
+    const hourHand = document.querySelector('.hour-hand')
+    const minHand = document.querySelector('.min-hand')
+    const secondHand = document.querySelector('.second-hand')
+
+    // 將時、分、秒針擺到對應時間的位置
+    const date = new Date
+    secondHand.style.transform = `rotate(calc((90deg + ${date.getSeconds() * 6}deg)))`
+    minHand.style.transform = `rotate(calc((90deg + ${date.getMinutes() * 6}deg)))`
+    hourHand.style.transform = `rotate(calc((90deg + ${date.getHours() * 6}deg)))`
+    // 建立一個移動1/60圈的function
+    function handleTimeChange(event) {
+      const innerTime = new Date
+      let nowSecond = innerTime.getSeconds()
+      if (nowSecond === 0) {
+        let nowMinute = innerTime.getMinutes()
+        minHand.style.transform = `rotate(calc((90deg + ${nowMinute * 6}deg)))`
+        if (nowMinute && nowMinute === 0) {
+          let nowHour = innerTime.getHours()
+          hourHand.style.transform = `rotate(calc((90deg + ${nowHour * 6}deg)))`
+        }
+      }
+      event.style.transform = `rotate(calc((90deg + ${nowSecond * 6}deg)))`
+    }
+
+    setInterval(() => {
+      handleTimeChange(secondHand)
+    }, 1000);
+      // 秒歸零時，分call function
+      // 分歸零時，時call function
+
+
+  </script>
+</body>
+
+</html>

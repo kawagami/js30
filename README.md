@@ -13,6 +13,12 @@
     * 可控制變形時的定點
 2. 看了解答後發現思考邏輯時進入誤區
     * 在funncion 內每次都會new Date 就不用IF判斷是否要分、時進位，直接更新成新值就好了
-
-
+3. this.dataset.名稱
+    * 可取得data-名稱 的值
+4. document.documentElement.style.setProperty(`要改的名稱`, 要改成的值)
+    * 可修改該頁面CSS Property
+5. CSS 變數概念
+    * 變數命名規則 : `--變數名稱`
+    * :root{預設值}
+    * 要用的變數使用 var(`--變數名稱`)
 
